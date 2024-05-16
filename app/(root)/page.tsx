@@ -1,9 +1,13 @@
-import { Button } from "@/components/ui/button";
+"use client";
 
-export default function Home() {
+import { Modal } from "@/components/ui/modal";
+
+const SetupPage = () => {
   return (
     <div className="p-4">
-        <Button>Click me</Button>
+        <Modal isOpen title="Test" description="Test Description" onClose={() => {}}></Modal>
     </div>
   );
 }
+
+export default SetupPage;
