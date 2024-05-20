@@ -5,7 +5,9 @@ import { Modal } from "@/components/ui/modal";
 const SetupPage = () => {
   return (
     <div className="p-4">
-        <Modal isOpen title="Test" description="Test Description" onClose={() => {}}></Modal>
+        <Modal title="Test" description="Test Description" isOpen onClose={() => {}}>
+          Children
+        </Modal>
     </div>
   );
 }
