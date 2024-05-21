@@ -1,13 +1,13 @@
 "use client";
 
 import { Modal } from "@/components/ui/modal";
+import { useStoreModal } from "@/hooks/use-store-modal";
 
 const SetupPage = () => {
+  const onOpen = useStoreModal();
   return (
     <div className="p-4">
-        <Modal title="Test" description="Test Description" isOpen onClose={() => {}}>
-          Children
-        </Modal>
+        Root
     </div>
   );
 }
