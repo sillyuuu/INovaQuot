@@ -2,7 +2,7 @@
 
 import { useParams, useRouter } from "next/navigation"
 
-import { SizeColumn, columns } from "./columns"
+import { BrandColumn, columns } from "./columns"
 import { useMediaQuery } from 'react-responsive';
 
 import { Button } from "@/components/ui/button"
@@ -12,11 +12,11 @@ import { DataTable } from "@/components/ui/data-table"
 import { ApiList } from "@/components/ui/api-list"
 import { Plus } from "lucide-react"
 
-interface SizeClientProps {
-    data: SizeColumn[]
+interface BrandClientProps {
+    data: BrandColumn[]
 }
 
-export const SizeClient: React.FC<SizeClientProps> = ({
+export const BrandClient: React.FC<BrandClientProps> = ({
     data
 }) => {
     const params = useParams();

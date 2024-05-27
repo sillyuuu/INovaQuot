@@ -1,7 +1,7 @@
 import prismadb from "@/lib/prismadb";
 import { BrandForm } from "./components/brand-form";
 
-const SizePage = async ({
+const BrandPage = async ({
     params
 }: {
     params: { brandId: string }
@@ -21,4 +21,4 @@ const SizePage = async ({
     );
 }
  
-export default SizePage;
+export default BrandPage;

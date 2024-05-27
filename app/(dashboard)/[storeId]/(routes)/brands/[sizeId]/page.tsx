@@ -1,5 +1,6 @@
 import prismadb from "@/lib/prismadb";
-import { BrandForm } from "./components/brand-form.tsx";
+
+import { BrandForm } from "../[brandId]/components/brand-form";
 
 const BrandPage = async ({
     params
