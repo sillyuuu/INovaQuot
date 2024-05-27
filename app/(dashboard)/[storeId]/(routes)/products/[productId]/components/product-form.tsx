@@ -1,6 +1,6 @@
 "use client";
 
-import { Product, Image, Category, Size, Color } from "@prisma/client";
+import { Product, Image, Category, Brand, Color } from "@prisma/client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
@@ -28,7 +28,7 @@ const formSchema = z.object({
     price: z.coerce.number().min(1),
     categoryId: z.string().min(1),
     colorId: z.string().min(1),
-    sizeId: z.string().min(1),
+    brandId: z.string().min(1),
     isFeatured: z.boolean().default(false).optional(),
     isArchived: z.boolean().default(false).optional(),
 });
@@ -40,14 +40,14 @@ interface ProductFormProps {
         images: Image[]
     } | null;
     categories: Category[];
-    sizes: Size[];
+    brands: Brand[];
     colors: Color[];
 }   
 
 export const ProductForm: React.FC<ProductFormProps> = ({
     initialData,
     categories,
-    sizes,
+    brands,
     colors
 }) => {
     const params = useParams();
@@ -72,7 +72,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
             price: 0,
             categoryId: '',
             colorId: '',
-            sizeId: '',
+            brandId: '',
             isFeatured: false,
             isArchived: false
         }
@@ -241,10 +241,10 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                     <div className="grid grid-cols-3 gap-8">
                         <FormField
                             control={form.control}
-                            name="sizeId"
+                            name="brandId"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Size</FormLabel>
+                                    <FormLabel>Brand</FormLabel>
                                     <Select
                                         disabled={loading}
                                         onValueChange={field.onChange}
@@ -253,16 +253,16 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                                     >
                                         <FormControl>
                                             <SelectTrigger className="md:w-full w-60">
-                                                <SelectValue defaultValue={field.value} placeholder="Select a size" />
+                                                <SelectValue defaultValue={field.value} placeholder="Select a brand" />
                                             </SelectTrigger>
                                         </FormControl>
                                         <SelectContent>
-                                            {sizes.map((size) => (
+                                            {brands.map((brand) => (
                                                 <SelectItem
-                                                    key={size.id}
-                                                    value={size.id}
+                                                    key={brand.id}
+                                                    value={brand.id}
                                                 >
-                                                    {size.name}
+                                                    {brand.name}
                                                 </SelectItem>
                                             ))}
                                         </SelectContent>

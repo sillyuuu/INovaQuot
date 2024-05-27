@@ -1,6 +1,6 @@
 "use client";
 
-import { Size } from "@prisma/client";
+import { Brand } from "@prisma/client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
@@ -24,13 +24,13 @@ const formSchema = z.object({
     value: z.string().min(1)
 });
 
-type SizeFormValues = z.infer<typeof formSchema>
+type BrandFormValues = z.infer<typeof formSchema>
 
-interface SizeFormProps {
-    initialData: Size | null;
+interface BrandFormProps {
+    initialData: Brand | null;
 }
 
-export const SizeForm: React.FC<SizeFormProps> = ({
+export const BrandForm: React.FC<BrandFormProps> = ({
     initialData
 }) => {
     const params = useParams();
@@ -44,7 +44,7 @@ export const SizeForm: React.FC<SizeFormProps> = ({
     const toastMessage = initialData ? "Size updated." : "Size created."
     const action = initialData ? "Save changes" : "Create"
 
-    const form = useForm<SizeFormValues>({
+    const form = useForm<BrandFormValues>({
         resolver: zodResolver(formSchema),
         defaultValues: initialData || {
             name: '',
@@ -52,15 +52,15 @@ export const SizeForm: React.FC<SizeFormProps> = ({
         }
     });
 
-    const onSubmit = async (data: SizeFormValues) => {
+    const onSubmit = async (data: BrandFormValues) => {
         try {
             setLoading(true);
             if (initialData) {
-                await axios.patch(`/api/${params.storeId}/sizes/${params.sizesId}`, data);
+                await axios.patch(`/api/${params.storeId}/brands/${params.brandsId}`, data);
             } else {
-                await axios.post(`/api/${params.storeId}/sizes`, data);
+                await axios.post(`/api/${params.storeId}/brands`, data);
             }
-            router.push(`/${params.storeId}/sizes`)
+            router.push(`/${params.storeId}/brands`)
             router.refresh();
             toast.success(toastMessage);
         } catch (error) {
@@ -73,12 +73,12 @@ export const SizeForm: React.FC<SizeFormProps> = ({
     const onDelete = async () => {
         try {
             setLoading(true);
-            await axios.delete(`/api/${params.storeId}/sizes/${params.sizesId}`)
+            await axios.delete(`/api/${params.storeId}/brands/${params.brandsId}`)
             router.refresh();
-            router.push(`/${params.storeId}/sizes`)
-            toast.success("Size deleted.")
+            router.push(`/${params.storeId}/brands`)
+            toast.success("Brands deleted.")
         } catch (error) {
-            toast.error("Make sure you removed all products using this size first.");
+            toast.error("Make sure you removed all products using this brand first.");
         } finally {
             setLoading(false);
             setOpen(false);
@@ -114,7 +114,7 @@ export const SizeForm: React.FC<SizeFormProps> = ({
                             disabled={loading}
                             variant="outline"
                             size="icon"
-                            onClick={() => router.push(`/${params.storeId}/sizes`)}
+                            onClick={() => router.push(`/${params.storeId}/brands`)}
                         >
                             <ChevronLeft className="h-4 w-4" />
                         </Button>  
@@ -132,7 +132,7 @@ export const SizeForm: React.FC<SizeFormProps> = ({
                                 <FormItem>
                                     <FormLabel>Name</FormLabel>
                                     <FormControl>
-                                        <Input className="md:w-full w-60" disabled={loading} placeholder="Size name" {...field} />
+                                        <Input className="md:w-full w-60" disabled={loading} placeholder="Brand name" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -147,7 +147,7 @@ export const SizeForm: React.FC<SizeFormProps> = ({
                                 <FormItem>
                                     <FormLabel>Value</FormLabel>
                                     <FormControl>
-                                        <Input className="md:w-full w-60" disabled={loading} placeholder="Size value (ex: S, M, L...)" {...field} />
+                                        <Input className="md:w-full w-60" disabled={loading} placeholder="Brand value" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>

@@ -27,10 +27,10 @@ export const SizeClient: React.FC<SizeClientProps> = ({
         <>
             <div className="flex items-center justify-between">
                 <Heading
-                    title={`Sizes (${data.length})`}
-                    description="Manage sizes for your store"
+                    title={`Brands (${data.length})`}
+                    description="Manage brands for your store"
                 />
-                <Button size={isMobile ? "icon" : "default"} onClick={() => router.push(`/${params.storeId}/sizes/new`)}>
+                <Button size={isMobile ? "icon" : "default"} onClick={() => router.push(`/${params.storeId}/brand/new`)}>
                     {isMobile ? (<Plus className="h-4 w-4" />) : (<Plus className="mr-2 h-4 w-4" />)}
                     {!isMobile && "Add New"}
                 </Button>
@@ -39,10 +39,10 @@ export const SizeClient: React.FC<SizeClientProps> = ({
             <DataTable columns={columns} data={data} searchKey="name" />
             <Heading
                 title="API"
-                description="API calls for Sizes"
+                description="API calls for Brands"
             />
             <Separator />
-            <ApiList entityName="sizes" entityIdName="sizeId" />
+            <ApiList entityName="brands" entityIdName="brandId" />
         </>
     )
 }
