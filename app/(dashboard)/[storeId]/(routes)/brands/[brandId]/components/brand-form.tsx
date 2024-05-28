@@ -56,7 +56,7 @@ export const BrandForm: React.FC<BrandFormProps> = ({
         try {
             setLoading(true);
             if (initialData) {
-                await axios.patch(`/api/${params.storeId}/brands/${params.brandsId}`, data);
+                await axios.patch(`/api/${params.storeId}/brands/${params.brandId}`, data);
             } else {
                 await axios.post(`/api/${params.storeId}/brands`, data);
             }
@@ -73,7 +73,7 @@ export const BrandForm: React.FC<BrandFormProps> = ({
     const onDelete = async () => {
         try {
             setLoading(true);
-            await axios.delete(`/api/${params.storeId}/brands/${params.brandsId}`)
+            await axios.delete(`/api/${params.storeId}/brands/${params.brandId}`)
             router.refresh();
             router.push(`/${params.storeId}/brands`)
             toast.success("Brands deleted.")
