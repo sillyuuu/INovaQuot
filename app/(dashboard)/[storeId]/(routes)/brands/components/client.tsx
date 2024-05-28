@@ -30,7 +30,7 @@ export const BrandClient: React.FC<BrandClientProps> = ({
                     title={`Brands (${data.length})`}
                     description="Manage brands for your store"
                 />
-                <Button size={isMobile ? "icon" : "default"} onClick={() => router.push(`/${params.storeId}/brand/new`)}>
+                <Button size={isMobile ? "icon" : "default"} onClick={() => router.push(`/${params.storeId}/brands/new`)}>
                     {isMobile ? (<Plus className="h-4 w-4" />) : (<Plus className="mr-2 h-4 w-4" />)}
                     {!isMobile && "Add New"}
                 </Button>
