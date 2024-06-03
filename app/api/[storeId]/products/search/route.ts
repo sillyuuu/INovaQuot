@@ -1,15 +1,10 @@
 import { NextResponse } from "next/server";
 import prismadb from "@/lib/prismadb";
 
-export async function GET(
-    req: Request,
-    { params }: { params: { storeId: string } }
-) {
+export async function GET(req: Request, { params }: { params: { storeId: string } }) {
     try {
         const { searchParams } = new URL(req.url);
-        const searchQuery = searchParams.get("q") || '';
-
-        console.log(`Received storeId: ${params.storeId}, searchQuery: ${searchQuery}`);
+        const searchQuery = searchParams.get("q") || undefined;  // Ensure searchQuery is either a string or undefined
 
         if (!params.storeId) {
             return new NextResponse("Store Id is required", { status: 400 });
@@ -18,10 +13,10 @@ export async function GET(
         const products = await prismadb.product.findMany({
             where: {
                 storeId: params.storeId,
-                name: {
+                name: searchQuery ? {
                     contains: searchQuery,
-                    mode: 'insensitive', // Case-insensitive search
-                },
+                    mode: 'insensitive', // Optional: makes the search case-insensitive
+                } : undefined,
                 isArchived: false,
             },
             include: {
