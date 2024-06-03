@@ -18,7 +18,7 @@ export async function GET(
                 storeId: params.storeId,
                 name: {
                     contains: searchQuery,
-                    mode: 'insensitive', // Case-insensitive search
+                    mode: 'insensitive',
                 },
                 isArchived: false,
             },
