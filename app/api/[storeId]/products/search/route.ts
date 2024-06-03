@@ -9,6 +9,8 @@ export async function GET(
         const { searchParams } = new URL(req.url);
         const searchQuery = searchParams.get("q") || '';
 
+        console.log(`Received storeId: ${params.storeId}, searchQuery: ${searchQuery}`);
+
         if (!params.storeId) {
             return new NextResponse("Store Id is required", { status: 400 });
         }
@@ -18,7 +20,7 @@ export async function GET(
                 storeId: params.storeId,
                 name: {
                     contains: searchQuery,
-                    mode: 'insensitive',
+                    mode: 'insensitive', // Case-insensitive search
                 },
                 isArchived: false,
             },
@@ -39,4 +41,3 @@ export async function GET(
         return new NextResponse("Internal Error", { status: 500 });
     }
 }
-
