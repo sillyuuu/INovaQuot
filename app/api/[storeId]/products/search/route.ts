@@ -13,10 +13,7 @@ export async function GET(req: Request, { params }: { params: { storeId: string 
         const products = await prismadb.product.findMany({
             where: {
                 storeId: params.storeId,
-                name: searchQuery ? {
-                    contains: searchQuery,
-                    mode: 'insensitive', // Optional: makes the search case-insensitive
-                } : undefined,
+                name: searchQuery, 
                 isArchived: false,
             },
             include: {
